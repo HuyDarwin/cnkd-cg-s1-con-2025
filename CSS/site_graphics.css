@@ -1,0 +1,195 @@
+.stage {
+    width: 1920px;
+    height: 1080px;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.holder {
+    width: 1920px;
+    height: 1080px;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+}
+
+#background {
+    background-image: none;
+    /*
+    background-image: url('../Images/[Bản chuẩn] Chiếc nón kỳ diệu - CG Version _ Tập 20 (15.10.2022) 1-39 screenshot.png');
+    */
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    opacity: 1;
+}
+
+/* g-Hold */
+
+#g-hold {
+    opacity: 1;
+}
+
+.players-score {
+    width: 100%;
+    height: 100%;
+    top: 0%;
+    left: 0%;
+    opacity: 0;
+}
+
+.ps-square {
+    width: 14.3%;
+    height: 13.7%;
+    top: 4.6%;
+}
+
+.pss-name {
+    width: 96%;
+    height: 25%;
+    left: 2%;
+    top: 0%;
+}
+
+.pss-name svg {
+    width: 100%;
+    height: 100%;
+    top: 0%;
+    left: 0%;
+}
+
+.pss-name svg text {
+    fill: black;
+    font-family: "Myriad Pro";
+    font-weight: bold;
+    font-size: 19px;
+    transform: translateY(67.5%);
+}
+
+.pss-score {
+    width: 100%;
+    height: 55%;
+    left: 0%;
+    top: 25%;
+    clip-path: inset(0% 0% 0% 0%);
+}
+
+.pss-score svg {
+    width: 96%;
+    height: 100%;
+    top: 0%;
+    left: 2%;
+}
+
+.pss-score svg text {
+    fill: black;
+    font-family: "UTM HelvetIns";
+    font-size: 68px;
+    transform: translateY(85%);
+}
+
+#pss-1 {
+    left: 27.6%;
+}
+
+#pss-2 {
+    left: 42.9%;
+}
+
+#pss-3 {
+    left: 58.2%;
+}
+
+.question {
+    width: 100%;
+    height: 100%;
+    top: 0%;
+    left: 0%;
+    opacity: 0;
+}
+
+.q-text {
+    width: 70%;
+    left: 25%;
+    top: 81.3%;
+    height: 11%;
+}
+
+.q-text svg {
+    width: 100%;
+    height: 100%;
+    top: 0%;
+    left: 0%;
+}
+
+.q-text svg text {
+    fill: white;
+    font-family: "UTM Avo";
+    font-size: 45px;
+}
+
+.prize {
+    width: 70%;
+    height: 15%;
+    left: 15%;
+    top: 75%;
+    opacity: 0;
+}
+
+.prize svg {
+    width: 100%;
+    height: 100%;
+    top: 0%;
+    left: 0%;
+}
+
+.prize svg text {
+    fill: red;
+    font-family: "UTM HelvetIns";
+    stroke: white;
+    stroke-width: 2px;
+    font-size: 140px;
+    transform: translateY(80%);
+}
+
+.buzzer {
+    width: 100%;
+    height: 100%;
+    top: 0%;
+    left: 0%;
+}
+
+.buzzer-cam-holder {
+    width: 33.3%;
+    height: 33.3%;
+    top: 0%;
+}
+
+.buzzer-dot {
+    width: 6%;
+    height: 10%;
+    bottom: 10%;
+    right: 4%;
+    border: 2px solid white;
+    border-radius: 50%;
+    background-color: red;
+    opacity: 0;
+}
+
+#bch-1 {
+    left: 0%;
+}
+
+#bch-2 {
+    left: 33.3%;
+}
+
+#bch-3 {
+    left: 66.6%;
+}
