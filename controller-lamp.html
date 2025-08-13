@@ -1,0 +1,314 @@
+<html>
+
+<head>
+	<title>Controller</title>
+
+	<script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+	<script type="text/javascript" src="JS/jquery-3.3.1.min.js"></script>
+	<script type="module" src="JS/firebase.js"></script>
+	<script type='module' src='JS/functions.js'></script>
+	<script type="module" src="JS/controller_fb.js"></script>
+	<script type="module" src="JS/controller_auth_fb.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="CSS/reset.css">
+	<link rel="stylesheet" type="text/css" href="CSS/site.css">
+	<link rel="stylesheet" type="text/css" href="CSS/site_controller.css">
+
+	<meta http-equiv='cache-control' content='no-cache'>
+	<meta http-equiv='expires' content='0'>
+	<meta http-equiv='pragma' content='no-cache'>
+
+	<meta charset="utf-8" />
+</head>
+
+<body>
+	<img class='background' src='Images/puzzleboard_bg.png' />
+
+	<!--
+	<iframe class='preview' id='pre_wheel' src='wheel.html' frameborder='0'></iframe>
+	-->
+	<div class="preview" id="pre_wheel">
+		<iframe src='graphics-jodu.html' style='top:0%;left:0%;width:1920px;height:1080px;transform:scale(0.333);transform-origin: left top;background-color: gray;' frameborder='0'></iframe>
+	</div>
+	<iframe class='preview' id='pre_puzzleboard' src='puzzleboard.html' frameborder='0'></iframe>
+
+	<div class='button_holder' id='bh_wheel'>
+		<!--
+		<button name='autocmd' class='change_wheel_back' id='cwb_main'>CHÍNH</button>
+		<button name='autocmd' class='change_wheel_back' id='cwb_red'>ĐỎ</button>
+		<button name='autocmd' class='change_wheel_back' id='cwb_yellow'>VÀNG</button>
+		<button name='autocmd' class='change_wheel_back' id='cwb_blue'>XANH</button>
+    
+		<button name='autocmd' class='change_wheel' id='cw_v1'>NÓN V1</button>
+		<button name='autocmd' class='change_wheel' id='cw_v2'>NÓN V2-3</button>
+		<button name='autocmd' class='change_wheel' id='cw_v3'>NÓN V4</button>
+		<button name='autocmd' class='change_wheel' id='cw_v4'>NÓN V4-5 TK</button>
+		-->
+
+		<button name='autocmd' id='spin_music'>NHẠC QUAY NÓN</button>
+
+		<!--
+    <div class='add_wedge_tag_holder'>
+      <button class='add_wedge_tag' id='awt_1m'>1 TRIỆU CG</button>
+      <button class='add_wedge_tag' id='awt_wild'>CƠ HỘI</button>
+      <button class='add_wedge_tag' id='awt_may'>MAY MẮN</button>
+      <button class='add_wedge_tag' id='awt_rui'>MAY RỦI</button>
+      <button class='add_wedge_tag' id='awt_gift'>PHẦN THƯỞNG</button>
+      <button class='add_wedge_tag' id='awt_them'>THÊM LƯỢT</button>
+      <button class='add_wedge_tag' id='awt_half_1'>1/2 CG 1</button>
+      <button class='add_wedge_tag' id='awt_half_2'>1/2 CG 2</button>
+      <button class='add_wedge_tag' id='awt_qn'>QUYỀN NĂNG</button>
+      <button class='add_wedge_tag' id='awt_mys'>Ô BÍ MẬT</button>
+      <button class='add_wedge_tag' id='awt_ex'>SIÊU TỐC</button>
+      <button class='add_wedge_tag' id='awt_ks'>KÉT SẮT</button>
+      <button name='autocmd' id='reset_wedges_tags'>ẨN Ô & THẺ</button>
+    </div>
+		-->
+
+		<p class='question_info_text' id='qit_category'>CÂU HỎI</p>
+		<textarea class='question_info' id='qi_category'></textarea>
+		<p class='question_info_text' id='qit_hint'>GIẢI THÍCH</p>
+		<textarea class='question_info' id='qi_hint'></textarea>
+
+		<button name='autocmd' id='reload'>RELOAD</button>
+		<button name='autocmd' id='reload_host'>RELOAD WEB DCT</button>
+		<button id='edit_passkey'>THAY ĐỔI MẬT KHẨU</button>
+		<button id='reload_auth'>RELOAD AUTH</button>
+	</div>
+
+	<div class='button_holder' id='bh_puzzleboard'>
+		<input type='file' id='get_questions_file' style="display:none" accept=".xls,.xlsx,.ods"></input>
+
+		<div class="select_round_holder">
+			<button class='select_round' id='sr_t1'>ĐN 1</button>
+			<button class='select_round' id='sr_t2'>ĐN 2</button>
+			<button class='select_round' id='sr_1'>VÒNG 1</button>
+			<button class='select_round' id='sr_2'>VÒNG 2</button>
+			<button class='select_round' id='sr_3'>VÒNG 3</button>
+			<button class='select_round' id='sr_tb'>Ô CHỮ PHỤ</button>
+			<button class='select_round' id='sr_a'>K.GIẢ</button>
+			<button class='select_round' id='sr_b'>Đ.BIỆT</button>
+		</div>
+
+		<!-- <button name='autocmd' id='reset_puzzleboard_data'>RESET DATA</button> !-->
+
+		<button name='autocmd_class' class='open_letter' id='ol_1'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_2'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_3'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_4'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_5'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_6'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_7'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_8'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_9'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_10'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_11'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_12'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_13'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_14'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_15'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_16'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_17'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_18'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_19'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_20'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_21'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_22'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_23'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_24'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_25'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_26'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_27'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_28'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_29'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_30'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_31'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_32'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_33'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_34'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_35'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_36'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_37'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_38'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_39'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_40'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_41'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_42'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_43'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_44'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_45'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_46'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_47'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_48'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_49'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_50'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_51'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_52'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_53'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_54'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_55'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_56'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_57'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_58'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_59'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_60'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_61'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_62'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_63'></button>
+		<button name='autocmd_class' class='open_letter' id='ol_64'></button>
+
+		<button name='autocmd' id='puzzle_reveal'>HIỆN Ô CHỮ</button>
+		<button name='autocmd' id='puzzle_solve'>GIẢI Ô CHỮ</button>
+		
+		<button name='autocmd' id='tossup_buzzer'>Đ.NHANH CHUÔNG</button>
+		<button name='autocmd' id='tossup_continue'>Đ.NHANH TIẾP TỤC</button>
+
+		<button id='question_toggle'>HIỆN CÂU HỎI</button>
+		<button id='players_score_toggle'>HIỆN ĐIỂM NC</button>
+
+		<textarea class="prize_input" placeholder="Giải thưởng"></textarea>
+		<button id='prize_toggle'>HIỆN</button>
+		<button id='prize_copy_1r'>1R</button>
+		<button id='prize_copy_2r'>2R</button>
+		<button id='prize_copy_3r'>3R</button>
+		<button id='prize_copy_1t'>1T</button>
+		<button id='prize_copy_2t'>2T</button>
+		<button id='prize_copy_3t'>3T</button>
+	</div>
+
+	<div class='button_holder' id='bh_sounds'>
+		<button name='autocmd' id='sound_he_2011'>INTRO 2011</button>
+		<button name='autocmd' id='sound_he_2011_2'>INTRO 2011 2</button>
+		<button name='autocmd' id='sound_he_2011_vkci'>INTRO 2011 VKCI</button>
+		<button name='autocmd' id='sound_he_2011_vkci_2'>INTRO 2011 VKCI 2</button>
+		<button name='autocmd' id='sound_model_going_up'>HỒNG NHUNG ĐI LÊN</button>
+		<button name='autocmd' id='sound_tossup'>ĐOÁN NHANH</button>
+		<button name='autocmd' id='sound_wrong'>SAI</button>
+		<button name='autocmd' id='sound_old_open_letter'>LẬT CHỮ CŨ</button>
+		<button name='autocmd' id='sound_leaderboard'>TỔNG KẾT ĐIỂM</button>
+		<button name='autocmd' id='sound_leaderboard_2'>TỔNG KẾT ĐIỂM 2</button>
+		<button name='autocmd' id='sound_present_short'>TRAO QUÀ NGẮN</button>
+		<button name='autocmd' id='sound_present_short_16042011'>TRAO QUÀ 16-4-2011</button>
+		<button name='autocmd' id='sound_present_short_16042011_real'>TRAO QUÀ 16-4-2011 REAL</button>
+		<button name='autocmd' id='sound_br_10s'>VĐB 10S</button>
+		<button name='autocmd' id='sound_tt_30s_o6'>30</button>
+		<button name='autocmd' id='sound_credit'>CREDIT 2001-2011</button>
+		<button name='autocmd' id='sound_credit_extended'>CREDIT 2011 EXTENDED</button>
+
+		<button name='autocmd' id='sound_stop'>DỪNG HẾT ÂM THANH</button>
+
+		<textarea class='buzzer_player'></textarea>
+		<textarea class='timer_text' disabled></textarea>
+	</div>
+
+	<div class='contestants_score'>
+		<p class='cont_text' id='ct_name'>TÊN</p>
+		<p class='cont_text' id='ct_input'>NHẬP</p>
+		<p class='cont_text' id='ct_round'>VÒNG</p>
+		<p class='cont_text' id='ct_total'>TỔNG</p>
+
+		<textarea class='contestant_name' id='cn_1' placeholder='Tên NC 1'></textarea>
+		<textarea class='contestant_score_input' id='csi_1' placeholder='Score'>0</textarea>
+		<textarea class='contestant_score_round' id='csr_1'>0</textarea>
+		<textarea class='contestant_score_total' id='cst_1'>0</textarea>
+
+		<textarea class='contestant_name' id='cn_2' placeholder='Tên NC 2'></textarea>
+		<textarea class='contestant_score_input' id='csi_2' placeholder='Score'>0</textarea>
+		<textarea class='contestant_score_round' id='csr_2'>0</textarea>
+		<textarea class='contestant_score_total' id='cst_2'>0</textarea>
+
+		<textarea class='contestant_name' id='cn_3' placeholder='Tên NC 3'></textarea>
+		<textarea class='contestant_score_input' id='csi_3' placeholder='Score'>0</textarea>
+		<textarea class='contestant_score_round' id='csr_3'>0</textarea>
+		<textarea class='contestant_score_total' id='cst_3'>0</textarea>
+
+		<button id='update_names'>CẬP NHẬT</button>
+
+		<textarea class='ket_sat_property' placeholder='Ghi chú'></textarea>
+
+		<button class='update_input_score' id='reset_input'>0</button>
+
+		<button class='update_round_score' id='add_to_round'>+ N</button>
+		<button class='update_round_score' id='subtract_from_round'>- N</button>
+		<button class='update_round_score' id='replace_round'>SET N</button>
+		<button class='update_round_score' id='reset_round'>0</button>
+
+		<button class='update_total_score' id='add_to_total'>+ V</button>
+		<button class='update_total_score' id='subtract_from_total'>- V</button>
+		<button class='update_total_score' id='replace_total'>SET V</button>
+		<button class='update_total_score' id='reset_total'>0</button>
+	</div>
+
+
+
+	<div class="popup" id="popup-passkey">
+		<p class="popup-title">Thay đổi mật khẩu</p>
+		<button class="popup-close">X</button>
+
+		<div class="popup-passkey-player" id="ppp_player_1">
+			<textarea class="ppp-input" placeholder="Người chơi 1..."></textarea>
+			<button class="ppp-submit">Cập nhật</button>
+
+			<div class="ppp-pass">
+				<svg data-top="0" data-ypos="0" data-lines="1" data-scale="true">
+					<text lengthAdjust="spacingAndGlyphs" id="line_1"></text>
+				</svg>
+			</div>
+			<button class="ppp-random">Ngẫu nhiên</button>
+		</div>
+
+		<div class="popup-passkey-player" id="ppp_player_2">
+			<textarea class="ppp-input" placeholder="Người chơi 2..."></textarea>
+			<button class="ppp-submit">Cập nhật</button>
+
+			<div class="ppp-pass">
+				<svg data-top="0" data-ypos="0" data-lines="1" data-scale="true">
+					<text lengthAdjust="spacingAndGlyphs" id="line_1"></text>
+				</svg>
+			</div>
+			<button class="ppp-random">Ngẫu nhiên</button>
+		</div>
+
+		<div class="popup-passkey-player" id="ppp_player_3">
+			<textarea class="ppp-input" placeholder="Người chơi 3..."></textarea>
+			<button class="ppp-submit">Cập nhật</button>
+
+			<div class="ppp-pass">
+				<svg data-top="0" data-ypos="0" data-lines="1" data-scale="true">
+					<text lengthAdjust="spacingAndGlyphs" id="line_1"></text>
+				</svg>
+			</div>
+			<button class="ppp-random">Ngẫu nhiên</button>
+		</div>
+
+		<div class="popup-passkey-player" id="ppp_host">
+			<textarea class="ppp-input" placeholder="Dẫn chương trình..."></textarea>
+			<button class="ppp-submit">Cập nhật</button>
+
+			<div class="ppp-pass">
+				<svg data-top="0" data-ypos="0" data-lines="1" data-scale="true">
+					<text lengthAdjust="spacingAndGlyphs" id="line_1"></text>
+				</svg>
+			</div>
+			<button class="ppp-random">Ngẫu nhiên</button>
+		</div>
+
+		<textarea class="popup-passkey-copy" disabled></textarea>
+
+	</div>
+
+	<script>
+		var round = '';
+
+		var category = '';
+		var hint = '';
+
+		var letters = [];
+
+		var tossup_boolean = false;
+
+		var tossup_int = '';
+
+		var win_or_lose = 0;
+	</script>
+</body>
