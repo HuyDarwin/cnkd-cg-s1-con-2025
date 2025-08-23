@@ -561,6 +561,9 @@ $(function () {
 		$('#sound_br_10s').click(function () {
 			con.PlayTimer(14, false);
 		});
+		$('#sound_tt_30s_o6').click(function () {
+			con.PlayTimer(30, false);
+		});
 
 		/*
 		$('.add_wedge_tag').click(function () {
