@@ -101,6 +101,8 @@ $(function () {
             }
 
             if (eval('data.letter_' + i) == 5) {
+              $('#letter_' + i).css('opacity', 0);
+
               $('#letter_' + i).css('background-image', 'url("Images/ô%20chữ%20trắng@3x.png")');
 
               $('#letter_' + i + ' div').playKeyframe({
@@ -108,6 +110,10 @@ $(function () {
                 duration: '0.4s',
                 timingFunction: 'linear'
               });
+              
+              setTimeout(function(){
+                $('#letter_' + i).css('opacity', 1);
+              }, 500);
               
               onValue(ref(db, dbKey + '/variables/letters/no_tonemark'), (snapshot) => {
                 $('#letter_' + i + ' div').html(eval('snapshot.val().letter_' + i));
