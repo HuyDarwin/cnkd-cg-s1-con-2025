@@ -83,7 +83,7 @@ $(function () {
 				update(ref(db, dbKey + '/commands'), { sound_credit_extended: 0 });
 			}
 			if (data.sound_tt_30s_o6 == 1) {
-				con.PlaySound("Sounds/Nhái nhạc 30s TT O6.mp3", 3);
+				con.PlaySound("Sounds/30s CNKD 05-06.mp3", 3);
 				update(ref(db, dbKey + '/commands'), { sound_tt_30s_o6: 0 });
 			}
 
